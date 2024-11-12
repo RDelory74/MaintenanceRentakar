@@ -19,16 +19,23 @@ public class Maintenance {
     private int hasVehicule;
     @Column(name = "statement")
     private String statement;
+    @Column(name= "duration")
+    private int duration;
 
-    public Maintenance(int id, LocalDate startDate, LocalDate endDate, int hasVehicule, String statement) {
+    public Maintenance(int id, LocalDate startDate, int duration, int hasVehicule, String statement) {
         this.id = id;
         this.startDate = startDate;
-        this.endDate = endDate;
+        this.endDate = calculateEndDate();
         this.hasVehicule = hasVehicule;
         this.statement = statement;
+        this.duration = duration;
+
     }
 
     public Maintenance() {
+    }
+    private LocalDate calculateEndDate() {
+        return startDate.plusDays(duration);
     }
 
     public int getId() {
